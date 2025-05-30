@@ -1,0 +1,19 @@
+# Arquivos sensíveis
+.env
+
+# Diretórios de cache e ambiente
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env.*
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
