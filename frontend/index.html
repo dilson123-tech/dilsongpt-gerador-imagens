@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Imagens IA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>ProfessorDilsBot - Gerador de Imagens com IA</h1>
+  <input type="text" id="prompt" placeholder="Digite o que deseja gerar..." />
+  <button onclick="gerarImagem()">Gerar Imagem</button>
+  <p id="mensagem"></p>
+  <img id="imagem" src="" alt="" style="display:none;">
+  
+  <script>
+    async function gerarImagem() {
+      const prompt = document.getElementById("prompt").value;
+      const resposta = await fetch("/gerar-imagem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const resultado = await resposta.json();
+      if (resposta.ok) {
+        document.getElementById("mensagem").textContent = resultado.mensagem;
+        const imagem = document.getElementById("imagem");
+        imagem.src = resultado.caminho;
+        imagem.style.display = "block";
+      } else {
+        document.getElementById("mensagem").textContent = "Erro: " + resultado.detail;
+      }
+    }
+  </script>
+</body>
+</html>
